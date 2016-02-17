@@ -1,0 +1,102 @@
+$legacy-support-for-ie : true !default;
+
+//inline-block
+@mixin inline-block{
+  display: inline-block;
+  @if $legacy-support-for-ie {
+    *vertical-align: auto;
+    zoom: 1;
+    *display: inline;
+  }
+}
+
+//border
+@mixin border($size , $color , $style , $radius ){
+    border: $size $color $style;
+    @if $radius > 0 {
+        border-radius:$radius;
+    }
+}
+@mixin border($vert, $size , $color , $style ){
+    border-#{$vert}: $size $color $style;
+}
+
+//font
+@mixin font($size , $color , $line-height: 1){
+    font-size: $size; color: $color ; line-height: $line-height; 
+}
+
+//opacity
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacity-ie: ($opacity * 100);
+  filter: alpha(opacity=$opacity-ie);
+}
+
+//clearFloat
+@mixin clearfix {
+    @if $legacy-support-for-ie {
+        *zoom: 1;
+    }
+    &:before,
+    &:after {
+        content: "";
+        display: table;
+    }
+    &:after {
+        clear: both;
+        overflow: hidden;
+    }
+}
+
+//box 
+@mixin box( $width , $height , $pad , $mar){
+    width:$width; height:$height;
+}
+
+//input_box
+@mixin input_size( $input-height, $padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)  {
+    height: $input-height;
+    padding: $padding-vertical $padding-horizontal;
+    font-size: $font-size;
+    line-height: $line-height;
+    border-radius: $border-radius;
+  }
+
+//select_box
+@mixin select_size ( $input-height ,$padding-vertical, $padding-horizontal , $font-size, $line-height, $border-radius){
+    height: $input-height;
+    line-height: $input-height;
+    padding: $padding-vertical $padding-horizontal;
+    font-size: $font-size;
+    border-radius: $border-radius;
+  }
+
+//:hover
+@mixin hover( $color , $bg ){
+    &:hover,
+    $:focus{
+        color:$color; background-color:$bg;
+    }
+}
+
+//images
+@mixin img_box( $width , $height , $display: block ) {
+  display: $display;
+  max-width: $width; 
+  max-height: $height; 
+}
+
+// p
+@mixin p_type($p-t , $p-b , $m-t , $m-b){
+    
+}
+
+
+
+
+
+
+
+
+
