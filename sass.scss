@@ -1,6 +1,8 @@
 @charset "utf-8" ;
 //IE Low version
 $legacy-support-for-ie : true !default;
+$border-style: 1px solid ;
+
 
 //inline-block
 @mixin inline-block{
@@ -12,9 +14,10 @@ $legacy-support-for-ie : true !default;
     }
 }
 
+
 //border
-@mixin border($radius , $color , $style:1px solid $color ){
-    border: $style;
+@mixin border($style , $radius:0){
+    border:$border-style $style;
     @if $radius != 0 {
         border-radius:$radius;
     }
@@ -132,7 +135,7 @@ $legacy-support-for-ie : true !default;
     }
 }
 
-@mixin btn($width , $height, $bg , $color ,  $size , $hover:true , $hover-bg:$bg , $hover-color:$color ,  $line-height: $height){
+@mixin btn($width , $height, $bg , $color ,  $size , $hover:false , $hover-bg:$bg , $hover-color:$color ,  $line-height: $height){
   @include inline-block;
   width:$width; height: $height;  background-color:$bg; color :$color; text-align: center; line-height: $line-height; font-size: $size;
   @if $hover{
@@ -141,19 +144,17 @@ $legacy-support-for-ie : true !default;
     }
   }
 }
-
-@mixin inp_txt( $size ,  $color , $hover:true , $hover-color:$color){
-    font-size:$size; color:$color;
-    @if $hover {
-      &:hover,
-      &:focus{
-        color:$hover-color;
-      }
-    }
+@mixin btn_box( $width , $height , $padding){
+  width:$width; height: $height; 
+  @if $padding != 0{
+    padding : $padding;
+  }
 }
 
 
-
+.main {
+  @include border(#ccc);
+}
 
 
 
