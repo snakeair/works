@@ -4,23 +4,20 @@ $legacy-support-for-ie : true !default;
 
 //inline-block
 @mixin inline-block{
-  display: inline-block;
-  @if $legacy-support-for-ie {
-    *vertical-align: auto;
-    zoom: 1;
-    *display: inline;
-  }
+    display: inline-block;
+    @if $legacy-support-for-ie {
+        *vertical-align: auto;
+        zoom: 1;
+        *display: inline;
+    }
 }
 
 //border
-@mixin border($style , $radius ){
+@mixin border($radius , $color , $style:1px solid $color ){
     border: $style;
     @if $radius != 0 {
         border-radius:$radius;
     }
-}
-@mixin border($vert, $style ){
-    border-#{$vert}: $style;
 }
 
 //font
@@ -30,18 +27,18 @@ $legacy-support-for-ie : true !default;
 
 //opacity
 @mixin opacity($opacity) {
-  opacity: $opacity;
-  $opacity-ie: ($opacity * 100);
-  filter: alpha(opacity=$opacity-ie);
+    opacity: $opacity;
+    $opacity-ie: ($opacity * 100);
+    filter: alpha(opacity=$opacity-ie);
 }
 
 //float
 @mixin float ($float:left){
-  @if $float == left {
-    float: left;
-  } @else {
-    float: right;
-  }
+    @if $float == left {
+      float: left;
+    } @else {
+      float: right;
+    }
 }
 
 //clearFloat
@@ -56,38 +53,39 @@ $legacy-support-for-ie : true !default;
     }
     &:after {
         clear: both;
-        overflow: hidden;
     }
 }
 
 //input_box
-@mixin input_size( $input-height, $padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)  {
-    height: $input-height;
+@mixin input_box( $width, $height, $padding-vertical, $padding-horizontal, $font-size,  $border, $line-height:$height, $border-radius:0 )  {
+    width : $width;
+    height: $height;
     padding: $padding-vertical $padding-horizontal;
     font-size: $font-size;
     line-height: $line-height;
+    border: 1px solid $border;
     border-radius: $border-radius;
-  }
+}
 
 //select_box
-@mixin select_size ( $input-height ,$padding-vertical, $padding-horizontal , $font-size, $line-height, $border-radius){
+@mixin select_box ( $input-height ,$padding-vertical, $padding-horizontal , $font-size, $line-height, $border , $border-radius:0){
     height: $input-height;
     line-height: $input-height;
     padding: $padding-vertical $padding-horizontal;
     font-size: $font-size;
+    border:1px solid $border;
     border-radius: $border-radius;
   }
 
 //position
 @mixin position($position, $args) {
     position: $position;
-
-  @each $o in top right bottom left margin-top margin-bottom margin-left margin-right {
-    $i: index($args, $o);
-    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
-        #{$o}: nth($args, $i + 1);
+    @each $o in top right bottom left margin-top margin-bottom margin-left margin-right {
+        $i: index($args, $o);
+        @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+            #{$o}: nth($args, $i + 1);
+        }
     }
-  }
 }
 @mixin absolute($args) { //绝对定位
     @include position(absolute, $args);
@@ -98,20 +96,14 @@ $legacy-support-for-ie : true !default;
 @mixin relative($args) {   // 相对定位
     @include position(relative, $args);
 }
-@mixin centre($args , $width , $height){  // 居中显示
+@mixin alert($width , $height , $args:0 ){  // 居中显示
     @include position(fixed , $args);
     margin-left:-($width / 2); margin-top:-($height / 2)
 }
 
 //box
-@mixin box($width , $height , $args){
-    width : $width ; height: $height;
-    @each $o in padding-top padding-right padding-bottom padding-left padding margin-top margin-bottom margin-left margin-right margin {
-    $i: index($args, $o);
-    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
-        #{$o}: nth($args, $i + 1);
-    }
-  }
+@mixin box($width , $height , $padding:0 , $margin:0 ){
+    width : $width ; height: $height;  padding: $padding; margin: $margin;
 }
 
 //center_box
@@ -121,14 +113,42 @@ $legacy-support-for-ie : true !default;
   }
 }
 
-
 //linkColor and :hover
-@mixin link($color , $bg:none , $hover-color:$color , $hover-bg:$bg , $hover:false){
-    color: $color; background-color: $bg;
+@mixin link($color ,$hover-color:$color ,$hover:false){
+    color: $color; 
     @if $hover {
         &:hover{
-            color:$color; background-color: $hover-bg;
+            color:$color;
         }
+    }
+}
+
+//imgCenter
+@mixin img_center($father:false){
+    @if $father {
+        display: table; text-align: center;
+    } @else {
+        display: table-cell; vertical-align: middle;
+    }
+}
+
+@mixin btn($width , $height, $bg , $color ,  $size , $hover:true , $hover-bg:$bg , $hover-color:$color ,  $line-height: $height){
+  @include inline-block;
+  width:$width; height: $height;  background-color:$bg; color :$color; text-align: center; line-height: $line-height; font-size: $size;
+  @if $hover{
+    &:hover{
+      background-color: $hover-bg; color:$hover-color; 
+    }
+  }
+}
+
+@mixin inp_txt( $size ,  $color , $hover:true , $hover-color:$color){
+    font-size:$size; color:$color;
+    @if $hover {
+      &:hover,
+      &:focus{
+        color:$hover-color;
+      }
     }
 }
 
@@ -136,14 +156,6 @@ $legacy-support-for-ie : true !default;
 
 
 
-
-
-
-
-
-.main{
-    @include float();
-}
 
 
 
