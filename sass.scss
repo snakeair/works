@@ -1,3 +1,5 @@
+@charset "utf-8" ;
+//IE Low version
 $legacy-support-for-ie : true !default;
 
 //inline-block
@@ -11,14 +13,14 @@ $legacy-support-for-ie : true !default;
 }
 
 //border
-@mixin border($size , $color , $style , $radius ){
-    border: $size $color $style;
-    @if $radius > 0 {
+@mixin border($style , $radius ){
+    border: $style;
+    @if $radius != 0 {
         border-radius:$radius;
     }
 }
-@mixin border($vert, $size , $color , $style ){
-    border-#{$vert}: $size $color $style;
+@mixin border($vert, $style ){
+    border-#{$vert}: $style;
 }
 
 //font
@@ -49,11 +51,6 @@ $legacy-support-for-ie : true !default;
     }
 }
 
-//box 
-@mixin box( $width , $height , $pad , $mar){
-    width:$width; height:$height;
-}
-
 //input_box
 @mixin input_size( $input-height, $padding-vertical, $padding-horizontal, $font-size, $line-height, $border-radius)  {
     height: $input-height;
@@ -72,31 +69,63 @@ $legacy-support-for-ie : true !default;
     border-radius: $border-radius;
   }
 
-//:hover
-@mixin hover( $color , $bg ){
-    &:hover,
-    $:focus{
-        color:$color; background-color:$bg;
+//position
+@mixin position($position, $args) {
+    position: $position;
+
+  @each $o in top right bottom left margin-top margin-bottom margin-left margin-right {
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+        #{$o}: nth($args, $i + 1);
+    }
+  }
+}
+@mixin absolute($args) { //绝对定位
+    @include position(absolute, $args);
+}
+@mixin fixed($args) {  // 悬浮效果
+    @include position(fixed, $args);
+}
+@mixin relative($args) {   // 相对定位
+    @include position(relative, $args);
+}
+@mixin centre($args , $width , $height){  // 居中显示
+    @include position(fixed , $args);
+    margin-left:-($width / 2); margin-top:-($height / 2)
+}
+
+//box
+@mixin box($width , $height , $args){
+    width : $width ; height: $height;
+    @each $o in padding-top padding-right padding-bottom padding-left padding margin-top margin-bottom margin-left margin-right margin {
+    $i: index($args, $o);
+    @if $i and $i + 1 <= length($args) and type-of(nth($args, $i + 1)) == number {
+        #{$o}: nth($args, $i + 1);
+    }
+  }
+}
+
+//linkColor and :hover
+@mixin link($color , $bg:none , $hover-color:$color , $hover-bg:$bg , $hover:false){
+    color: $color; background-color: $bg;
+    @if $hover {
+        &:hover{
+            color:$color; background-color: $hover-bg
+        }
     }
 }
 
-//images
-@mixin img_box( $width , $height , $display: block ) {
-  display: $display;
-  max-width: $width; 
-  max-height: $height; 
+
+
+
+
+
+
+
+
+.main{
+    @include link(#ccc , red , #111 , blue , true)
 }
-
-// p
-@mixin p_type($p-t , $p-b , $m-t , $m-b){
-    
-}
-
-
-
-
-
-
 
 
 
