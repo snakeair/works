@@ -35,6 +35,15 @@ $legacy-support-for-ie : true !default;
   filter: alpha(opacity=$opacity-ie);
 }
 
+//float
+@mixin float ($float:left){
+  @if $float == left {
+    float: left;
+  } @else {
+    float: right;
+  }
+}
+
 //clearFloat
 @mixin clearfix {
     @if $legacy-support-for-ie {
@@ -105,12 +114,20 @@ $legacy-support-for-ie : true !default;
   }
 }
 
+//center_box
+@mixin center_box($extend:true){
+  @if $extend {
+    margin-left:auto; margin-right:auto;
+  }
+}
+
+
 //linkColor and :hover
 @mixin link($color , $bg:none , $hover-color:$color , $hover-bg:$bg , $hover:false){
     color: $color; background-color: $bg;
     @if $hover {
         &:hover{
-            color:$color; background-color: $hover-bg
+            color:$color; background-color: $hover-bg;
         }
     }
 }
@@ -123,8 +140,9 @@ $legacy-support-for-ie : true !default;
 
 
 
+
 .main{
-    @include link(#ccc , red , #111 , blue , true)
+    @include float();
 }
 
 
