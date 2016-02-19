@@ -143,6 +143,7 @@ $border-style: 1px solid ;
     }
   }
 }
+
 //buttonBox
 @mixin btn_box( $width , $height , $padding){
   width:$width; height: $height; 
@@ -150,7 +151,6 @@ $border-style: 1px solid ;
     padding : $padding;
   }
 }
-
 
 .main {
   @include border(#ccc);
