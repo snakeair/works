@@ -3,7 +3,6 @@
 $legacy-support-for-ie : true !default;
 $border-style: 1px solid ;
 
-
 //inline-block
 @mixin inline-block{
     display: inline-block;
@@ -14,12 +13,13 @@ $border-style: 1px solid ;
     }
 }
 
-
 //border
-@mixin border($style , $radius:0){
-    border:$border-style $style;
-    @if $radius != 0 {
-        border-radius:$radius;
+@mixin border($border , $radius:0){
+    @if length($border) == 3 {
+        border: $border;
+    }
+    @else {
+        border: $border-style $border;
     }
 }
 
@@ -110,10 +110,8 @@ $border-style: 1px solid ;
 }
 
 //center_box
-@mixin center_box($extend:true){
-  @if $extend {
+@mixin center_box{
     margin-left:auto; margin-right:auto;
-  }
 }
 
 //linkColor and :hover
@@ -135,7 +133,8 @@ $border-style: 1px solid ;
     }
 }
 
-@mixin btn($width , $height, $bg , $color ,  $size , $hover:false , $hover-bg:$bg , $hover-color:$color ,  $line-height: $height){
+//button
+@mixin btn($width , $height, $bg , $color ,  $size  , $hover-bg:$bg , $hover-color:$color ,  $line-height: $height , $hover:false){
   @include inline-block;
   width:$width; height: $height;  background-color:$bg; color :$color; text-align: center; line-height: $line-height; font-size: $size;
   @if $hover{
@@ -144,6 +143,7 @@ $border-style: 1px solid ;
     }
   }
 }
+//buttonBox
 @mixin btn_box( $width , $height , $padding){
   width:$width; height: $height; 
   @if $padding != 0{
