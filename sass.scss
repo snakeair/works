@@ -6,8 +6,12 @@
  *          inline-block设置，border和radius设置，font，透明度这是（opacity），浮动，清理浮动，表单盒子，position设置，
  *          盒子，居中显示，link和：hover，按钮，图片居中
  */
+
 $legacy-support-for-ie : true !default;
 $border-style: 1px solid !default;
+$font-family : 'Microsoft Yahei', 'Simsun' !default;
+$font-number : 'Arial' !default;
+
 
 //inline-block
 @mixin inline-block{
