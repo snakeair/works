@@ -1,9 +1,6 @@
 @charset "utf-8" ;
 /**
  * Sass通用组件
- * 包含内容：低版本IE声明，常用border声明，
- *          inline-block设置，border和radius设置，font，透明度这是（opacity），清理浮动，表单盒子，position设置，
- *          居中显示，link和：hover，按钮，图片居中
  */
 // 常量
 $legacy-support-for-ie : true !default;
