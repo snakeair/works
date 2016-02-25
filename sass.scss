@@ -1,7 +1,7 @@
 @charset "utf-8" ;
 /**
  * Sass通用组件
- */
+ **/
 // 常量
 $legacy-support-for-ie : true !default;
 $border-style: 1px solid !default;
@@ -29,7 +29,7 @@ $red : #c40000;
 %inline-block{
     @include inline-block;
 }
-
+//边框
 //border
 @mixin border($border , $radius:0){
     @if length($border) == 3 {
@@ -40,6 +40,12 @@ $red : #c40000;
     }
     @if $radius != 0{
         border-radius:$radius;
+    }
+}
+// 部分边框，或者边框的部分样式，例如：border-top：red；border-left:red; ——> border_part(top left , red);
+@mixin border_part($part , $border-type){
+    @each $o in $part{
+        border-#{$o}:$border-type;
     }
 }
 
@@ -124,7 +130,7 @@ $red : #c40000;
 @mixin link($color ,$hover-color:$color ){
     color: $color; 
     &:hover{
-        color:$color;
+        color:$hover-color;
     }
 }
 
@@ -134,6 +140,7 @@ $red : #c40000;
         color:$hover-color; text-decoration:underline
     }
 }
+
 //imgCenter
 @mixin img_center($father:false){
     @if $father {
@@ -271,5 +278,5 @@ $red : #c40000;
 
 //实例
 .main{
-    @include text(500px , 500px , 15px , 10px , 20px);
+    @include border_part(top left , 1px solid #c40000);
 }
