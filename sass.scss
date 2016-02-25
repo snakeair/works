@@ -7,14 +7,14 @@ $legacy-support-for-ie : true !default;
 $border-style: 1px solid !default;
 $font-family : 'Microsoft Yahei', 'Simsun' !default;
 $font-number : 'Arial' !default;
-$title-h1 : 22px;
-$title-h2 : 18px;
-$title-h3 : 16px;
-$txt1 : 16px;
-$txt2 : 14px;
-$TXT3 : 12px;
-$bd-color : #e5e5e5;
-$red : #c40000;
+$title-h1 : 22px !default;
+$title-h2 : 18px !default;
+$title-h3 : 16px !default;
+$txt1 : 16px !default;
+$txt2 : 14px !default;
+$TXT3 : 12px !default;
+$bd-color : #e5e5e5 !default;
+$red : #c40000 !default;
 
 
 //inline-block
