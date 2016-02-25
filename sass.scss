@@ -1,16 +1,23 @@
 @charset "utf-8" ;
-//IE Low version
 /**
  * Sass通用组件
  * 包含内容：低版本IE声明，常用border声明，
- *          inline-block设置，border和radius设置，font，透明度这是（opacity），浮动，清理浮动，表单盒子，position设置，
- *          盒子，居中显示，link和：hover，按钮，图片居中
+ *          inline-block设置，border和radius设置，font，透明度这是（opacity），清理浮动，表单盒子，position设置，
+ *          居中显示，link和：hover，按钮，图片居中
  */
-
+// 常量
 $legacy-support-for-ie : true !default;
 $border-style: 1px solid !default;
 $font-family : 'Microsoft Yahei', 'Simsun' !default;
 $font-number : 'Arial' !default;
+$title-h1 : 22px;
+$title-h2 : 18px;
+$title-h3 : 16px;
+$txt1 : 16px;
+$txt2 : 14px;
+$TXT3 : 12px;
+$bd-color : #e5e5e5;
+$red : #c40000;
 
 
 //inline-block
@@ -22,6 +29,9 @@ $font-number : 'Arial' !default;
         *display: inline;
     }
 }
+%inline-block{
+    @include inline-block;
+}
 
 //border
 @mixin border($border , $radius:0){
@@ -31,11 +41,14 @@ $font-number : 'Arial' !default;
     @else {
         border: $border-style $border;
     }
+    @if $radius != 0{
+        border-radius:$radius;
+    }
 }
 
 //font
 @mixin font($size , $color , $line-height: 1){
-    font-size: $size; color: $color ; line-height: $line-height; 
+    font:$size/$inline-height; color:$color;
 }
 
 //opacity
@@ -43,15 +56,6 @@ $font-number : 'Arial' !default;
     opacity: $opacity;
     $opacity-ie: ($opacity * 100);
     filter: alpha(opacity=$opacity-ie);
-}
-
-//float
-@mixin float ($float:left){
-    @if $float == left {
-      float: left;
-    } @else {
-      float: right;
-    }
 }
 
 //clearFloat
@@ -68,26 +72,23 @@ $font-number : 'Arial' !default;
         clear: both;
     }
 }
+%clearfix{
+    @include clearfix;
+}
 
 //input_box
-@mixin input_box( $width, $height, $padding-vertical, $padding-horizontal, $font-size,  $border, $line-height:$height, $border-radius:0 )  {
+@mixin input_box( $width, $height, $padding-vertical, $padding-horizontal,  $line-height:$height )  {
     width : $width;
     height: $height;
     padding: $padding-vertical $padding-horizontal;
-    font-size: $font-size;
     line-height: $line-height;
-    border: 1px solid $border;
-    border-radius: $border-radius;
 }
 
 //select_box
-@mixin select_box ( $input-height ,$padding-vertical, $padding-horizontal , $font-size, $line-height, $border , $border-radius:0){
+@mixin select_box ( $input-height ,$padding-vertical, $padding-horizontal ,  $line-height:$height ){
     height: $input-height;
     line-height: $input-height;
     padding: $padding-vertical $padding-horizontal;
-    font-size: $font-size;
-    border:1px solid $border;
-    border-radius: $border-radius;
   }
 
 //position
@@ -109,31 +110,33 @@ $font-number : 'Arial' !default;
 @mixin relative($args) {   // 相对定位
     @include position(relative, $args);
 }
-@mixin alert($width , $height , $args:0 ){  // 居中显示
+@mixin fixed_center($width , $height , $args:0 ){  // 居中显示
     @include position(fixed , $args);
     margin-left:-($width / 2); margin-top:-($height / 2)
-}
-
-//box
-@mixin box($width , $height , $padding:0 , $margin:0 ){
-    width : $width ; height: $height;  padding: $padding; margin: $margin;
 }
 
 //center_box
 @mixin center_box{
     margin-left:auto; margin-right:auto;
 }
+%center_box{
+    @include center_box;
+}
 
 //linkColor and :hover
-@mixin link($color ,$hover-color:$color ,$hover:false){
+@mixin link($color ,$hover-color:$color ){
     color: $color; 
-    @if $hover {
-        &:hover{
-            color:$color;
-        }
+    &:hover{
+        color:$color;
     }
 }
 
+@mixin line-border($color , $hover-color ){
+    color: $color;
+    &:hover{
+        color:$hover-color; text-decoration:underline
+    }
+}
 //imgCenter
 @mixin img_center($father:false){
     @if $father {
@@ -142,35 +145,134 @@ $font-number : 'Arial' !default;
         display: table-cell; vertical-align: middle;
     }
 }
+%img_center{
+    @include img_center($father:false);
+}
 
-//button
-@mixin btn($width , $height, $bg , $color ,  $size  , $hover-bg:$bg , $hover-color:$color ,  $line-height: $height , $hover:false){
-  @include inline-block;
-  width:$width; height: $height;  background-color:$bg; color :$color; text-align: center; line-height: $line-height; font-size: $size;
-  @if $hover{
-    &:hover{
-      background-color: $hover-bg; color:$hover-color; 
+@mixin float($float:left) {
+  @if float == left{
+    float: left;
+  }
+  @else{
+    float:right;
+  }
+}
+%float{
+  @include float($float:left);
+}
+
+//btn-box
+@mixin btn_box($width , $height, $line-height:$height){
+    width:$width; height:$height; line-height:$height; text-align: center;
+}
+
+//btn-type
+@mixin btn_type($size , $color , $bg , $hover-color:$color , $hover-bg:$bg , $hover:false){
+    font-size:$size; color:$color; background-color:$bg;
+    @if hover{
+        color:$hover-color; background-color:$hover-bg;
     }
-  }
 }
 
-//buttonBox
-@mixin btn_box( $width , $height , $padding){
-  width:$width; height: $height; 
-  @if $padding != 0{
-    padding : $padding;
-  }
+//分块（ul+li的nav）
+@mixin sort( $width , $amount){
+    width: floor($width/$amount);
+}
+
+//表单禁止修改
+@mixin disabled($bgColor: #e6e6e6, $textColor:#c40000){
+    background-color: $bgColor !important;
+    color: $textColor !important;
+    cursor: not-allowed !important;
+}
+
+//border三角形（等腰 上下左右）
+@mixin arrow($direction,  $size,  $color) {  
+    width: 0;  
+    height: 0;  
+    line-height: 0;  
+    font-size: 0;  
+    overflow: hidden;  
+    border-width: $size;  
+    @if $direction == top {  
+        border-style: dashed dashed solid dashed;  
+        border-color: transparent transparent $color transparent;  
+        border-top: none;  
+    }  
+    @else if $direction == bottom {  
+        border-style: solid dashed dashed dashed;  
+        border-color: $color transparent transparent transparent;  
+        border-bottom: none;  
+    }  
+    @else if $direction == right {  
+        border-style: dashed dashed dashed solid;  
+        border-color: transparent transparent transparent $color;  
+        border-right: none;  
+    }  
+    @else if $direction == left {  
+        border-style: dashed solid dashed dashed;  
+        border-color: transparent $color transparent transparent;  
+        border-left: none;  
+    }
+}  
+
+//border三角形（等腰 上左 上右 下左 下右）
+@mixin arrow_askew($direction,  $size,  $color){
+    width: 0;  
+    height: 0;  
+    overflow: hidden;   
+    @if $direction == top-left {  
+        border-width: $size $size 0 0;  
+        border-style: solid ;  
+        border-color: $color transparent  transparent  transparent ;   
+    }
+    @if $direction == top-right {  
+        border-width: 0 $size $size 0;  
+        border-style: solid ;  
+        border-color: transparent $color  transparent  transparent ;
+    }
+    @if $direction == bottom-right {  
+        border-width: 0 0 $size $size;  
+        border-style: solid ;  
+        border-color:  transparent  transparent $color transparent ;
+    }
+    @if $direction == bottom-left {  
+        border-width: $size 0 0 $size;  
+        border-style: solid ;  
+        border-color: transparent  transparent  transparent $color  ; 
+    }   
+}
+
+//循环图/雪碧图
+@mixin cycle_img($size ,$width , $height ){
+    @for $i from 0 to $size{
+      .d-icon-#{$i}{ background-position: -$width -#{+ $i*$height}; }
+    } 
+}
+
+//表单边框
+@mixin form_border{
+    border:1px solid $bd-color;
+}
+%inp_border{
+    @include form_border;
+}
+// input-box
+@mixin inp_txt($width ,$height , $padding , $line-height:$height ){
+    width:$width; height:$height; padding-left:$padding; line-height:$line-height; 
+    @include form_border;
+}
+//textarea-box
+@mixin text($width ,$height , $padding-vertical , $padding-horizontal , $line-height:$height ){
+    width:$width; height:$height; padding:$padding-vertical $padding-horizontal; line-height:$line-height; 
+    @include form_border;
 }
 
 
 
 
-//  实例测试
-.main {
-  @include border(#ccc);
+
+//实例
+.main{
+    @include text(500px , 500px , 15px , 10px , 20px);
 }
-
-
-
-
-
