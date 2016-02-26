@@ -1,7 +1,8 @@
 @charset "utf-8" ;
 /**
  * Sass通用组件
- **/
+ */
+ 
 // 常量
 $legacy-support-for-ie : true !default;
 $border-style: 1px solid !default;
@@ -15,6 +16,9 @@ $txt2 : 14px !default;
 $TXT3 : 12px !default;
 $bd-color : #e5e5e5 !default;
 $red : #c40000 !default;
+$gray : #ccc !default;
+$gray-hover : #111 !default;
+$black : $333;
 
 
 //inline-block
@@ -29,6 +33,7 @@ $red : #c40000 !default;
 %inline-block{
     @include inline-block;
 }
+
 //边框
 //border
 @mixin border($border , $radius:0){
@@ -171,8 +176,8 @@ $red : #c40000 !default;
 }
 
 //btn-type
-@mixin btn_type($size , $color , $bg , $hover-color:$color , $hover-bg:$bg , $hover:false){
-    font-size:$size; color:$color; background-color:$bg;
+@mixin btn_type( $color , $bg , $hover-color:$color , $hover-bg:$bg , $hover:false){
+    color:$color; background-color:$bg;
     @if hover{
         color:$hover-color; background-color:$hover-bg;
     }
@@ -272,8 +277,12 @@ $red : #c40000 !default;
     @include form_border;
 }
 
-
-
+@mixin bold{
+    font-weight: bold;
+}
+%bold{
+    @include bold;
+}
 
 
 //实例
