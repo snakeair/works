@@ -21,38 +21,6 @@ $gray-hover : #111 !default;
 $black : $333;
 
 
-//inline-block
-@mixin inline-block{
-    display: inline-block;
-    @if $legacy-support-for-ie {
-        *vertical-align: auto;
-        zoom: 1;
-        *display: inline;
-    }
-}
-%inline-block{
-    @include inline-block;
-}
-
-//边框
-//border
-@mixin border($border , $radius:0){
-    @if length($border) == 3 {
-        border: $border;
-    }
-    @else {
-        border: $border-style $border;
-    }
-    @if $radius != 0{
-        border-radius:$radius;
-    }
-}
-// 部分边框，或者边框的部分样式，例如：border-top：red；border-left:red; ——> border_part(top left , red);
-@mixin border_part($part , $border-type){
-    @each $o in $part{
-        border-#{$o}:$border-type;
-    }
-}
 
 //font
 @mixin font($size , $color , $line-height: 1){
@@ -85,19 +53,13 @@ $black : $333;
 }
 
 //input_box
-@mixin input_box( $width, $height, $padding-vertical, $padding-horizontal,  $line-height:$height )  {
+@mixin input_box( $width, $height, $padding-left )  {
     width : $width;
     height: $height;
-    padding: $padding-vertical $padding-horizontal;
-    line-height: $line-height;
+    padding-left: $padding-left;
+    line-height: $height;
 }
 
-//select_box
-@mixin select_box ( $input-height ,$padding-vertical, $padding-horizontal ,  $line-height:$height ){
-    height: $input-height;
-    line-height: $input-height;
-    padding: $padding-vertical $padding-horizontal;
-  }
 
 //position
 @mixin position($position, $args) {
@@ -171,8 +133,8 @@ $black : $333;
 }
 
 //btn-box
-@mixin btn_box($width , $height, $line-height:$height){
-    width:$width; height:$height; line-height:$height; text-align: center;
+@mixin btn_box($width , $height, $bg , $color , $size){
+    width:$width; height:$height; line-height:$height; text-align: center; color:$color; background-color:$bg; font-size:$size;
 }
 
 //btn-type
