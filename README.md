@@ -1,7 +1,7 @@
 #包含内容：
 ## sass.scss scss基础函数  
 
-    * **opacity**                 透明度  
+    * opacity                 透明度  
     * clearfix                清除浮动  
     * absolute  
     * fixed  
