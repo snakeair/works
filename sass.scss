@@ -22,11 +22,6 @@ $black : $333;
 
 
 
-//font
-@mixin font($size , $color , $line-height: 1){
-    font:$size/$inline-height; color:$color;
-}
-
 //opacity
 @mixin opacity($opacity) {
     opacity: $opacity;
@@ -52,15 +47,6 @@ $black : $333;
     @include clearfix;
 }
 
-//input_box
-@mixin input_box( $width, $height, $padding-left )  {
-    width : $width;
-    height: $height;
-    padding-left: $padding-left;
-    line-height: $height;
-}
-
-
 //position
 @mixin position($position, $args) {
     position: $position;
@@ -80,31 +66,19 @@ $black : $333;
 @mixin relative($args) {   // 相对定位
     @include position(relative, $args);
 }
-@mixin fixed_center($width , $height , $args:0 ){  // 居中显示
-    @include position(fixed , $args);
-    margin-left:-($width / 2); margin-top:-($height / 2)
+
+
+@mixin fixed_center($width , $height , 50% , 50% ){  // 居中显示
+    position: fixed; top:50%; left:50%;
+    margin-left:-($width / 2); margin-top:-($height / 2);
 }
 
-//center_box
-@mixin center_box{
-    margin-left:auto; margin-right:auto;
-}
-%center_box{
-    @include center_box;
-}
 
 //linkColor and :hover
 @mixin link($color ,$hover-color:$color ){
     color: $color; 
     &:hover{
         color:$hover-color;
-    }
-}
-
-@mixin line-border($color , $hover-color ){
-    color: $color;
-    &:hover{
-        color:$hover-color; text-decoration:underline
     }
 }
 
@@ -120,30 +94,12 @@ $black : $333;
     @include img_center($father:false);
 }
 
-@mixin float($float:left) {
-  @if float == left{
-    float: left;
-  }
-  @else{
-    float:right;
-  }
-}
-%float{
-  @include float($float:left);
-}
-
 //btn-box
-@mixin btn_box($width , $height, $bg , $color , $size){
-    width:$width; height:$height; line-height:$height; text-align: center; color:$color; background-color:$bg; font-size:$size;
+@mixin btn_box($width , $height, $bg , $color  , $size , $hover_bg:$bg ){
+    width:$width; height:$height; line-height:$height; text-align: center; color:$color; background-color:$bg; font-size:$size; 
+    &:hover{background-color:$hover_bg;}
 }
 
-//btn-type
-@mixin btn_type( $color , $bg , $hover-color:$color , $hover-bg:$bg , $hover:false){
-    color:$color; background-color:$bg;
-    @if hover{
-        color:$hover-color; background-color:$hover-bg;
-    }
-}
 
 //分块（ul+li的nav）
 @mixin sort( $width , $amount){
@@ -239,9 +195,3 @@ $black : $333;
     @include form_border;
 }
 
-@mixin bold{
-    font-weight: bold;
-}
-%bold{
-    @include bold;
-}
