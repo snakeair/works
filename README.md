@@ -1,5 +1,5 @@
 #包含内容：
-sass.scss                       sass基础函数  
+## sass.scss                       sass基础函数  
     * opacity        透明度  
     * clearfix       清除浮动  
     * absolute  
@@ -13,4 +13,4 @@ sass.scss                       sass基础函数
 
 
 
-resize.js/resize.scss           移动相应函数及scss
+## resize.js/resize.scss           移动相应函数及scss
