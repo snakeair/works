@@ -164,23 +164,10 @@ $black : $333;
     }   
 }
 
-//循环图/雪碧图
-@mixin cycle_img($size ,$width , $height ){
-    @for $i from 0 to $size{
-      .d-icon-#{$i}{ background-position: -$width -#{+ $i*$height}; }
-    } 
-}
 
-//表单边框
-@mixin form_border{
-    border:1px solid $bd-color;
-}
-%inp_border{
-    @include form_border;
-}
-// input-box
-@mixin inp_txt($width ,$height , $padding , $line-height:$height ){
-    width:$width; height:$height; padding-left:$padding; line-height:$line-height; 
+// input-txt
+@mixin inp_txt($width ,$height , $padding , $color , $size){
+    width:$width; height:$height; padding-left:$padding; line-height:$height;  color:$color; font-size: $size;
     @include form_border;
 }
 //textarea-box
