@@ -245,9 +245,3 @@ $black : $333;
 %bold{
     @include bold;
 }
-
-
-//实例
-.main{
-    @include border_part(top left , 1px solid #c40000);
-}
