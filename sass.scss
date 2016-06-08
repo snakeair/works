@@ -106,12 +106,6 @@ $black : $333;
     width: floor($width/$amount);
 }
 
-//表单禁止修改
-@mixin disabled($bgColor: #e6e6e6, $textColor:#c40000){
-    background-color: $bgColor !important;
-    color: $textColor !important;
-    cursor: not-allowed !important;
-}
 
 //border三角形（等腰 上下左右）
 @mixin arrow($direction,  $size,  $color) {  
